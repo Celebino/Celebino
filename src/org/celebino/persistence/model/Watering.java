@@ -2,9 +2,12 @@ package org.celebino.persistence.model;
 
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,12 +19,13 @@ import javax.persistence.Table;
 @NamedQuery(name = "Watering.getAll", query = "from Watering")
 public class Watering {
 	
-	@Id @GeneratedValue
+	@Id 
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "watering_id")
 	private Long id;
 	
-	@ManyToOne
-	@JoinColumn(name = "fk_garden_id", table = "Garden")
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "fk_garden_id")
 	private Garden garden;
 	
 	@Column(name = "watering_date")
