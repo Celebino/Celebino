@@ -5,7 +5,7 @@ import java.util.Set;
 
 import javax.ws.rs.core.Application;
 
-import org.apache.catalina.filters.CorsFilter;
+import org.jboss.resteasy.plugins.interceptors.CorsFilter;
 import org.celebino.persistence.controller.ArtificialLightController;
 import org.celebino.persistence.controller.GardenController;
 import org.celebino.persistence.controller.GardenStatusController;
@@ -22,7 +22,8 @@ public class CelebinoApplication extends Application {
 		// Multiple client-request: Cross-Filter
 		CorsFilter filter = new CorsFilter();
 		filter.getAllowedOrigins().add("*");
-		
+		filter.setAllowedMethods("POST, GET, DELETE, PUT, OPTIONS");
+		filter.setAllowedHeaders("Content-Type, Authorization");
 			
 		this.singletons.add(filter);
 		
