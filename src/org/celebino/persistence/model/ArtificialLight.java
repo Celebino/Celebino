@@ -1,6 +1,6 @@
 package org.celebino.persistence.model;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -27,19 +27,20 @@ public class ArtificialLight {
 	@JoinColumn(name = "fk_garden_id")
 	private Garden garden;
 	
-	@Column(name = "artificialLight_date")
-	private Date date;
-	//hour
+	@Column(name = "artificiallight_time")
+	private Timestamp time;
 	
 	public ArtificialLight(){}
 	
-	public ArtificialLight(Long id, Garden garden, Date date) {
+	
+	public ArtificialLight(Long id, Garden garden, Timestamp time) {
 		super();
 		this.id = id;
 		this.garden = garden;
-		this.date = date;
+		this.time = time;
 	}
-	
+
+
 	public Long getId() {
 		return id;
 	}
@@ -55,18 +56,19 @@ public class ArtificialLight {
 	public void setGarden(Garden garden) {
 		this.garden = garden;
 	}
-	
-	public Date getDate() {
-		return date;
-	}
-	
-	public void setDate(Date date) {
-		this.date = date;
-	}
-	
-	@Override
-	public String toString() {
-		return "Watering [id=" + id + ", id_garden=" + garden.getId() + ", date=" + date + "]";
+
+	public Timestamp getTime() {
+		return time;
 	}
 
+	public void setTime(Timestamp time) {
+		this.time = time;
+	}
+
+	@Override
+	public String toString() {
+		return "ArtificialLight [id=" + id + ", garden=" + garden + ", time=" + time + "]";
+	}
+	
+	
 }

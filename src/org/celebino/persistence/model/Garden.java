@@ -39,6 +39,8 @@ public class Garden {
 	
 	@Column(name = "garden_airTemperature")	
 	private int airTemperature;
+	
+	
 	public Garden(){}
 	
 	public Garden(Long id, User user, int soilHumidity, int sunLight, int airHumidity, int airTemperature) {

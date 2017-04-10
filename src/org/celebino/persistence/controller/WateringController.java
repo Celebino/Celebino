@@ -19,7 +19,7 @@ import org.celebino.persistence.dao.WateringDao;
 import org.celebino.persistence.model.Watering;
 
 
-
+@Path("watering")
 public class WateringController {
 	
 	/**

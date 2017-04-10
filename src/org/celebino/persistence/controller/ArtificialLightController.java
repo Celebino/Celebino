@@ -19,7 +19,7 @@ import org.celebino.persistence.dao.ArtificialLightDao;
 import org.celebino.persistence.model.ArtificialLight;
 
 
-
+@Path("artificialLight")
 public class ArtificialLightController {
 	
 	/**

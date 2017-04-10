@@ -1,6 +1,6 @@
 package org.celebino.persistence.model;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -28,11 +28,7 @@ public class GardenStatus {
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_garden_id")
 	private Garden garden;
-	
-	@Column(name = "gardenStatus_date")
-	private Date date;
-	//hour
-	
+
 	@Column(name = "gardenStatu_sunLight")
 	private int sunLight;
 	
@@ -45,20 +41,23 @@ public class GardenStatus {
 	@Column(name = "gardenStatus_airTemperature")
 	private int airTemperature;
 	
+	@Column(name = "gardenStatus_time")
+	private Timestamp time;
 	
-	public GardenStatus(Long id, Garden garden, Date date, int sunLight, int soilHumidity, int airHumidity,
-			int airTemperature) {
+	public GardenStatus(){}
+	
+	
+	public GardenStatus(Long id, Garden garden, int sunLight, int soilHumidity, int airHumidity, int airTemperature,
+			Timestamp time) {
 		super();
 		this.id = id;
 		this.garden = garden;
-		this.date = date;
 		this.sunLight = sunLight;
 		this.soilHumidity = soilHumidity;
 		this.airHumidity = airHumidity;
 		this.airTemperature = airTemperature;
+		this.time = time;
 	}
-	
-	
 	@XmlElement
 	public Long getId() {
 		return id;
@@ -73,13 +72,8 @@ public class GardenStatus {
 	public void setGarden(Garden garden) {
 		this.garden = garden;
 	}
-	@XmlElement
-	public Date getDate() {
-		return date;
-	}
-	public void setDate(Date date) {
-		this.date = date;
-	}
+	
+	
 	@XmlElement
 	public int getSunLight() {
 		return sunLight;
@@ -87,6 +81,7 @@ public class GardenStatus {
 	public void setSunLight(int sunLight) {
 		this.sunLight = sunLight;
 	}
+	
 	@XmlElement
 	public int getSoilHumidity() {
 		return soilHumidity;
@@ -94,6 +89,7 @@ public class GardenStatus {
 	public void setSoilHumidity(int soilHumidity) {
 		this.soilHumidity = soilHumidity;
 	}
+	
 	@XmlElement
 	public int getAirHumidity() {
 		return airHumidity;
@@ -101,6 +97,7 @@ public class GardenStatus {
 	public void setAirHumidity(int airHumidity) {
 		this.airHumidity = airHumidity;
 	}
+	
 	@XmlElement
 	public int getAirTemperature() {
 		return airTemperature;
@@ -109,12 +106,23 @@ public class GardenStatus {
 		this.airTemperature = airTemperature;
 	}
 
+	@XmlElement
+	public Timestamp getTime() {
+		return time;
+	}
+
+	public void setTime(Timestamp time) {
+		this.time = time;
+	}
 
 
 	@Override
 	public String toString() {
-		return "GardenStatus [id=" + id + ", id_garden=" + garden.getId() + ", date=" + date + ", sunLight=" + sunLight
-				+ ", soilHumidity=" + soilHumidity + ", airHumidity=" + airHumidity + ", airTemperature="
-				+ airTemperature + "]";
+		return "GardenStatus [id=" + id + ", garden=" + garden + ", sunLight=" + sunLight + ", soilHumidity="
+				+ soilHumidity + ", airHumidity=" + airHumidity + ", airTemperature=" + airTemperature + ", time="
+				+ time + "]";
 	}
+
+	
+	
 }
