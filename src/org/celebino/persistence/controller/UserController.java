@@ -1,5 +1,7 @@
 package org.celebino.persistence.controller;
 
+
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,6 +19,7 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 
 import org.celebino.persistence.dao.UserDao;
 import org.celebino.persistence.model.User;
+import org.hibernate.HibernateException;
 
 
 @Path("user")
@@ -114,5 +117,113 @@ public class UserController {
 		return builder.build();
 	}
 	
+	@PermitAll
+	@GET
+	@Path("/{email}")
+	@Produces("application/json")
+	public Response getUserByEmail(@PathParam("email") String email ){
+		ResponseBuilder builder = Response.status(Response.Status.BAD_REQUEST);
+		builder.expires(new Date());
+
+		try {
+			
+			User user = UserDao.getInstance().getByEmail(email); 
+			
+			if (user != null) {
+				
+				builder.status(Response.Status.OK);
+				builder.entity(user);
+				
+			} else {
+				
+				builder.status(Response.Status.NOT_FOUND);
+			}
+
+		} catch (SQLException exception) {
+
+			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
+		}
+
+		return builder.build();
+	}
+	
+	/**
+	 * Get user by username
+	 * @param username
+	 * @return
+	 */
+	@PermitAll
+	@GET
+	@Path("/{username}")
+	@Produces("application/json")
+	public Response getUserByUsername(@PathParam("username") String username ){
+		ResponseBuilder builder = Response.status(Response.Status.BAD_REQUEST);
+		builder.expires(new Date());
+
+		try {
+			
+			User user = UserDao.getInstance().getByUsername(username); 
+			
+			if (user != null) {
+				
+				builder.status(Response.Status.OK);
+				builder.entity(user);
+				
+			} else {
+				
+				builder.status(Response.Status.NOT_FOUND);
+			}
+
+		} catch (SQLException exception) {
+
+			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
+		}
+
+		return builder.build();
+	}
+	
+	
+	/**
+	 * Login
+	 * @param emailInput
+	 * @param passwordInput
+	 * @return
+	 * @throws SQLException
+	 */
+	@PermitAll
+	@POST
+	@Path("/login")
+	@Produces("application/json")
+	public Response login(String emailInput, String passwordInput) throws SQLException{
+		
+		ResponseBuilder builder = Response.status(Response.Status.BAD_REQUEST);
+		builder.expires(new Date());
+
+		try {
+			
+			User user = UserDao.getInstance().getByEmail(emailInput); 
+			
+			
+			
+			if (user != null) {
+				
+				if(user.getPassword().equals("passwordInput")){
+					builder.status(Response.Status.OK);
+					builder.entity(user);
+				}
+			} else {
+				
+				builder.status(Response.Status.NOT_FOUND);
+			}
+
+		} catch (HibernateException exception) {
+
+			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
+		}	
+		
+
+		return builder.build();
+	}
 	
 }
+

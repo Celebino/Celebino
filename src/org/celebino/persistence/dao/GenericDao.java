@@ -11,6 +11,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+@SuppressWarnings("deprecation")
 public abstract class GenericDao<PK, T> {
 
 	private static Logger logger = LogManager.getLogger(GenericDao.class);
@@ -158,7 +159,7 @@ public abstract class GenericDao<PK, T> {
 		return resultado;
 	}
 	
-	public boolean delete(int id) throws SQLException {
+	public boolean delete(Long id) throws SQLException {
 
 		boolean isDelete = false;
 		
