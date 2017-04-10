@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import com.sun.xml.txw2.annotation.XmlElement;
+
 @Entity
 @Table(name = "tb_garden")
 @NamedQuery(name = "Garden.getAll", query = "from Garden")
@@ -37,7 +39,8 @@ public class Garden {
 	
 	@Column(name = "garden_airTemperature")	
 	private int airTemperature;
-
+	public Garden(){}
+	
 	public Garden(Long id, User user, int soilHumidity, int sunLight, int airHumidity, int airTemperature) {
 		super();
 		this.id = id;
@@ -47,7 +50,7 @@ public class Garden {
 		this.airHumidity = airHumidity;
 		this.airTemperature = airTemperature;
 	}
-
+	@XmlElement
 	public Long getId() {
 		return id;
 	}
@@ -56,7 +59,7 @@ public class Garden {
 		this.id = id;
 	}
 
-	
+	@XmlElement
 	public User getUser() {
 		return user;
 	}
@@ -65,7 +68,7 @@ public class Garden {
 		this.user = user;
 	}
 
-	
+	@XmlElement
 	public int getSoilHumidity() {
 		return soilHumidity;
 	}
@@ -74,7 +77,7 @@ public class Garden {
 		this.soilHumidity = soilHumidity;
 	}
 
-	
+	@XmlElement
 	public int getSunLight() {
 		return sunLight;
 	}
@@ -83,7 +86,7 @@ public class Garden {
 		this.sunLight = sunLight;
 	}
 
-	
+	@XmlElement
 	public int getAirHumidity() {
 		return airHumidity;
 	}
@@ -92,7 +95,7 @@ public class Garden {
 		this.airHumidity = airHumidity;
 	}
 
-	
+	@XmlElement
 	public int getAirTemperature() {
 		return airTemperature;
 	}

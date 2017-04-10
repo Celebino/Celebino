@@ -18,6 +18,7 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 import org.celebino.persistence.dao.GardenStatusDao;
 import org.celebino.persistence.model.GardenStatus;
 
+@Path("gardenstatus")
 public class GardenStatusController {
 	
 	

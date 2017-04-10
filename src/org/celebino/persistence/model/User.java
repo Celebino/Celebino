@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import com.sun.xml.txw2.annotation.XmlElement;
+
 @Entity
 @Table(name = "tb_user")
 @NamedQuery(name = "User.getAll", query = "from User")
@@ -40,7 +42,7 @@ public class User {
 		this.name = name;
 		this.password = password;
 	}
-
+	@XmlElement
 	public Long getId() {
 		return id;
 	}
@@ -48,7 +50,7 @@ public class User {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	@XmlElement
 	public String getName() {
 		return name;
 	}
@@ -57,7 +59,7 @@ public class User {
 		this.name = name;
 	}
 	
-	
+	@XmlElement
 	public String getUsername() {
 		return username;
 	}
@@ -66,7 +68,7 @@ public class User {
 		this.username = username;
 	}
 	
-	
+	@XmlElement
 	public String getPassword() {
 		return password;
 	}
@@ -76,7 +78,7 @@ public class User {
 		this.password = password;
 	}
 
-
+	@XmlElement
 	public String getEmail() {
 		return email;
 	}
