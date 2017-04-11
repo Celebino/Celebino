@@ -122,9 +122,9 @@ public class GardenController {
 	 */
 	@PermitAll
 	@GET
-	@Path("/username/{id}")
+	@Path("/username/{username}")
 	@Produces("application/json")
-	public Response getGardensByUsername(@PathParam("id") String username) {
+	public Response getGardensByUsername(@PathParam("username") String username) {
 
 		ResponseBuilder builder = Response.status(Response.Status.BAD_REQUEST);
 		builder.expires(new Date());
@@ -150,6 +150,11 @@ public class GardenController {
 		return builder.build();
 	}
 	
+	/**
+	 * Get gardens by user id
+	 * @param userId
+	 * @return
+	 */
 	@PermitAll
 	@GET
 	@Path("/user/{id}")

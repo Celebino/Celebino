@@ -15,7 +15,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
+import org.celebino.persistence.dao.GardenDao;
 import org.celebino.persistence.dao.GardenStatusDao;
+import org.celebino.persistence.model.Garden;
 import org.celebino.persistence.model.GardenStatus;
 
 @Path("gardenstatus")
@@ -113,4 +115,35 @@ public class GardenStatusController {
 
 		return builder.build();
 	}
+	
+	@PermitAll
+	@GET
+	@Path("/garden/{gardenId}")
+	@Produces("application/json")
+	public Response getGardensByGardenId(@PathParam("gardenId") Long gardenId) {
+
+		ResponseBuilder builder = Response.status(Response.Status.BAD_REQUEST);
+		builder.expires(new Date());
+
+		try {
+			
+			List<GardenStatus> gardenStatus = GardenStatusDao.getInstance().getByGardenId(gardenId); 
+			
+			if (gardenStatus != null) {
+				
+				builder.status(Response.Status.OK);
+				builder.entity(gardenStatus);	
+			} else {
+				
+				builder.status(Response.Status.NOT_FOUND);
+			}
+
+		} catch (SQLException exception) {
+
+			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
+		}
+
+		return builder.build();
+	}
+	
 }

@@ -39,7 +39,7 @@ public class GardenDao extends GenericDao<Long, Garden> {
 	/**
 	 * get garden by User id
 	 * 
-	 * NAO TA FUNCIONANDO
+	 * 
 	 * @param userId
 	 * @return
 	 * @throws SQLException
@@ -56,7 +56,7 @@ public class GardenDao extends GenericDao<Long, Garden> {
 
 
 			Query query = session.createQuery(hql);
-			query.setParameter("userId", "%" + userId + "%");
+			query.setParameter("userId",  userId);
 
 			gardens = (List<Garden>) query.list();
 
