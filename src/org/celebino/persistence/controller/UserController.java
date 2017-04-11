@@ -18,6 +18,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
 import org.celebino.persistence.dao.UserDao;
+import org.celebino.persistence.model.Login;
 import org.celebino.persistence.model.User;
 import org.hibernate.HibernateException;
 
@@ -195,23 +196,22 @@ public class UserController {
 	@POST
 	@Path("/login")
 	@Produces("application/json")
-	public Response login(String emailInput, String passwordInput) throws SQLException{
+	public Response login(Login login) throws SQLException{
 		
 		ResponseBuilder builder = Response.status(Response.Status.BAD_REQUEST);
 		builder.expires(new Date());
 
 		try {
 			
-			User user = UserDao.getInstance().getByEmail(emailInput); 
-			
-			
-			
+			User user = UserDao.getInstance().getByEmail(login.getEmail()); 
+
 			if (user != null) {
 				
-				if(user.getPassword().equals("passwordInput")){
+				if(user.getPassword().equals(login.getPassword())){
 					builder.status(Response.Status.OK);
 					builder.entity(user);
-				}
+				}  
+				
 			} else {
 				
 				builder.status(Response.Status.NOT_FOUND);
