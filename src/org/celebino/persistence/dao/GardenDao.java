@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.celebino.persistence.model.Garden;
+import org.celebino.persistence.model.User;
 
 public class GardenDao extends GenericDao<Long, Garden> {
 
@@ -22,7 +23,7 @@ public class GardenDao extends GenericDao<Long, Garden> {
 	@Override
 	public Class<?> getEntityClass() {
 		// TODO Auto-generated method stub
-		return null;
+		return Garden.class;
 	}
 
 	@Override

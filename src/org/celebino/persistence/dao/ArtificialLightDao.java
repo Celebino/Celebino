@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.celebino.persistence.model.ArtificialLight;
+import org.celebino.persistence.model.User;
 
 public class ArtificialLightDao extends GenericDao<Long, ArtificialLight>{
 
@@ -23,7 +24,7 @@ public class ArtificialLightDao extends GenericDao<Long, ArtificialLight>{
 	@Override
 	public Class<?> getEntityClass() {
 		// TODO Auto-generated method stub
-		return null;
+		return ArtificialLight.class;
 	}
 
 	@Override

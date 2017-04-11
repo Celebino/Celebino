@@ -27,7 +27,7 @@ public class UserDao extends GenericDao<Long, User> {
 	@Override
 	public Class<?> getEntityClass() {
 		// TODO Auto-generated method stub
-		return null;
+		return User.class;
 	}
 
 	@Override
