@@ -77,7 +77,7 @@ public class GardenController {
 	}
 	
 	/**
-	 * Retorna jardim atraves do Id
+	 * Get Garden by Id
 	 * 
 	 * @param idGarden
 	 * @return Response
@@ -99,6 +99,74 @@ public class GardenController {
 				
 				builder.status(Response.Status.OK);
 				builder.entity(garden);	
+			} else {
+				
+				builder.status(Response.Status.NOT_FOUND);
+			}
+
+		} catch (SQLException exception) {
+
+			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
+		}
+
+		return builder.build();
+	}
+	
+	
+	
+	/**
+	 * Get garden by username's user
+	 * 
+	 * @param username
+	 * @return Response
+	 */
+	@PermitAll
+	@GET
+	@Path("/username/{id}")
+	@Produces("application/json")
+	public Response getGardensByUsername(@PathParam("id") String username) {
+
+		ResponseBuilder builder = Response.status(Response.Status.BAD_REQUEST);
+		builder.expires(new Date());
+
+		try {
+			
+			List<Garden> gardens = GardenDao.getInstance().getByUsername(username); 
+			
+			if (gardens != null) {
+				
+				builder.status(Response.Status.OK);
+				builder.entity(gardens);	
+			} else {
+				
+				builder.status(Response.Status.NOT_FOUND);
+			}
+
+		} catch (SQLException exception) {
+
+			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
+		}
+
+		return builder.build();
+	}
+	
+	@PermitAll
+	@GET
+	@Path("/user/{id}")
+	@Produces("application/json")
+	public Response getGardensByUserId(@PathParam("id") Long userId) {
+
+		ResponseBuilder builder = Response.status(Response.Status.BAD_REQUEST);
+		builder.expires(new Date());
+
+		try {
+			
+			List<Garden> gardens = GardenDao.getInstance().getByUserId(userId); 
+			
+			if (gardens != null) {
+				
+				builder.status(Response.Status.OK);
+				builder.entity(gardens);	
 			} else {
 				
 				builder.status(Response.Status.NOT_FOUND);
