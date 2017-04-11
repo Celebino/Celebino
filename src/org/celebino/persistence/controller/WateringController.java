@@ -15,7 +15,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
+import org.celebino.persistence.dao.ArtificialLightDao;
 import org.celebino.persistence.dao.WateringDao;
+import org.celebino.persistence.model.ArtificialLight;
 import org.celebino.persistence.model.Watering;
 
 
@@ -101,6 +103,41 @@ public class WateringController {
 				builder.status(Response.Status.OK);
 				builder.entity(watering);
 				
+			} else {
+				
+				builder.status(Response.Status.NOT_FOUND);
+			}
+
+		} catch (SQLException exception) {
+
+			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
+		}
+
+		return builder.build();
+	}
+	
+	/**
+	 * Get watering by garden's id
+	 * @param gardenId
+	 * @return
+	 */
+	@PermitAll
+	@GET
+	@Path("/garden/{gardenId}")
+	@Produces("application/json")
+	public Response getWateringByGardenId(@PathParam("gardenId") Long gardenId) {
+
+		ResponseBuilder builder = Response.status(Response.Status.BAD_REQUEST);
+		builder.expires(new Date());
+
+		try {
+			
+			List<Watering> waterings = WateringDao.getInstance().getByGardenId(gardenId); 
+			
+			if (waterings != null) {
+				
+				builder.status(Response.Status.OK);
+				builder.entity(waterings);	
 			} else {
 				
 				builder.status(Response.Status.NOT_FOUND);

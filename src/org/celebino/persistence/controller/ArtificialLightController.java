@@ -16,7 +16,9 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
 import org.celebino.persistence.dao.ArtificialLightDao;
+import org.celebino.persistence.dao.GardenStatusDao;
 import org.celebino.persistence.model.ArtificialLight;
+import org.celebino.persistence.model.GardenStatus;
 
 
 @Path("artificialLight")
@@ -87,7 +89,7 @@ public class ArtificialLightController {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
-	public Response getArtificialLIghtById(@PathParam("id") Long idArtificialLight) {
+	public Response getArtificialLightById(@PathParam("id") Long idArtificialLight) {
 		
 		ResponseBuilder builder = Response.status(Response.Status.BAD_REQUEST);
 		builder.expires(new Date());
@@ -101,6 +103,41 @@ public class ArtificialLightController {
 				builder.status(Response.Status.OK);
 				builder.entity(artificialLight);
 				
+			} else {
+				
+				builder.status(Response.Status.NOT_FOUND);
+			}
+
+		} catch (SQLException exception) {
+
+			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
+		}
+
+		return builder.build();
+	}
+	
+	/**
+	 * Get artificial lights by garden's id
+	 * @param gardenId
+	 * @return
+	 */
+	@PermitAll
+	@GET
+	@Path("/garden/{gardenId}")
+	@Produces("application/json")
+	public Response getArtificialLightByGardenId(@PathParam("gardenId") Long gardenId) {
+
+		ResponseBuilder builder = Response.status(Response.Status.BAD_REQUEST);
+		builder.expires(new Date());
+
+		try {
+			
+			List<ArtificialLight> artificialLights = ArtificialLightDao.getInstance().getByGardenId(gardenId); 
+			
+			if (artificialLights != null) {
+				
+				builder.status(Response.Status.OK);
+				builder.entity(artificialLights);	
 			} else {
 				
 				builder.status(Response.Status.NOT_FOUND);

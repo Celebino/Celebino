@@ -39,7 +39,6 @@ public class GardenDao extends GenericDao<Long, Garden> {
 	/**
 	 * get garden by User id
 	 * 
-	 * 
 	 * @param userId
 	 * @return
 	 * @throws SQLException

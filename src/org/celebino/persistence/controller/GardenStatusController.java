@@ -116,6 +116,11 @@ public class GardenStatusController {
 		return builder.build();
 	}
 	
+	/**
+	 * Get garden status by garden's id
+	 * @param gardenId
+	 * @return
+	 */
 	@PermitAll
 	@GET
 	@Path("/garden/{gardenId}")
