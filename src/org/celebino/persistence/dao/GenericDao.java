@@ -12,7 +12,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 @SuppressWarnings("deprecation")
-public abstract class GenericDao<PK, T> {
+public abstract class GenericDao<PK , T> {
 
 	private static Logger logger = LogManager.getLogger(GenericDao.class);
 
@@ -219,6 +219,7 @@ public abstract class GenericDao<PK, T> {
 		return list;
 	}
 
+	@SuppressWarnings("unchecked")
 	public T getById(Long pk) throws SQLException {
 
 		Session session = HibernateUtil.getSessionFactory().openSession();

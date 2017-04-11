@@ -46,6 +46,7 @@ public class UserController {
 			Long idUser = (long) UserDao.getInstance().insert(user);
 			user.setId(idUser);
 			builder.status(Response.Status.OK).entity(user);
+
 		
 		} catch (SQLException e) {
 			
@@ -119,7 +120,7 @@ public class UserController {
 	
 	@PermitAll
 	@GET
-	@Path("/{email}")
+	@Path("/email/{email}")
 	@Produces("application/json")
 	public Response getUserByEmail(@PathParam("email") String email ){
 		ResponseBuilder builder = Response.status(Response.Status.BAD_REQUEST);
@@ -154,7 +155,7 @@ public class UserController {
 	 */
 	@PermitAll
 	@GET
-	@Path("/{username}")
+	@Path("/username/{username}")
 	@Produces("application/json")
 	public Response getUserByUsername(@PathParam("username") String username ){
 		ResponseBuilder builder = Response.status(Response.Status.BAD_REQUEST);
