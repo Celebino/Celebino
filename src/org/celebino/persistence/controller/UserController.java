@@ -195,6 +195,7 @@ public class UserController {
 	@PermitAll
 	@POST
 	@Path("/login")
+	@Consumes("application/json")
 	@Produces("application/json")
 	public Response login(Login login) throws SQLException{
 		
@@ -209,11 +210,13 @@ public class UserController {
 				
 				if(user.getPassword().equals(login.getPassword())){
 					builder.status(Response.Status.OK);
-					builder.entity(user);
-				}  
+				}  else{
+					// Senha errada
+					builder.status(Response.Status.UNAUTHORIZED);
+				}
 				
 			} else {
-				
+				// Usuario nao encontrado
 				builder.status(Response.Status.NOT_FOUND);
 			}
 
