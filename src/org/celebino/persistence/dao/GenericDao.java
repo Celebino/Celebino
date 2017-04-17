@@ -21,6 +21,33 @@ public abstract class GenericDao<PK , T> {
 
 	public abstract Class<?> getEntityClass();
 
+	
+	public Long insertU(T entity) throws SQLException {
+
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+
+		Long id;
+		try {
+
+			session.beginTransaction();
+			id =  (Long) session.save(entity);
+			session.getTransaction().commit();
+
+		} catch (HibernateException hibernateException) {
+
+			session.getTransaction().rollback();
+
+			throw new SQLException(hibernateException);
+
+		} finally {
+
+			session.close();
+		}
+
+		return id;
+	}
+
 	public Long insert(T entity) throws SQLException {
 
 		Session session = HibernateUtil.getSessionFactory().openSession();

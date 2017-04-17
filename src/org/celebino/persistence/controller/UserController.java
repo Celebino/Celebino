@@ -44,7 +44,7 @@ public class UserController {
 		
 		try {
 			
-			Long idUser = (long) UserDao.getInstance().insert(user);
+			Long idUser = (long) UserDao.getInstance().insertU(user);
 			user.setId(idUser);
 			builder.status(Response.Status.OK).entity(user);
 
