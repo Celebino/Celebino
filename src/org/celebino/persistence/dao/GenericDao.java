@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.celebino.persistence.hibernate.HibernateUtil;
+import org.celebino.persistence.model.Garden;
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -24,12 +25,12 @@ public abstract class GenericDao<PK , T> {
 
 		Session session = HibernateUtil.getSessionFactory().openSession();
 
-		Long id;
 
+		Long id;
 		try {
 
 			session.beginTransaction();
-			id =  (Long) session.save(entity);
+			id =  (Long) session.merge(entity);
 			session.getTransaction().commit();
 
 		} catch (HibernateException hibernateException) {

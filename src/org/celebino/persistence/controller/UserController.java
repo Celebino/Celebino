@@ -210,6 +210,7 @@ public class UserController {
 				
 				if(user.getPassword().equals(login.getPassword())){
 					builder.status(Response.Status.OK);
+					builder.entity(user);
 				}  else{
 					// Senha errada
 					builder.status(Response.Status.UNAUTHORIZED);

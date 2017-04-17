@@ -39,9 +39,9 @@ public class GardenController {
 		
 		try {
 			
-			Long idGarden = (long) GardenDao.getInstance().insert(garden);
-			garden.setId(idGarden);
-			builder.status(Response.Status.OK).entity(garden);
+			Long t = (Long) GardenDao.getInstance().insert(garden);
+
+			builder.status(Response.Status.OK);
 		
 		} catch (SQLException e) {
 			
